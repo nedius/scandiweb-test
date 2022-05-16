@@ -2,22 +2,16 @@
 
 namespace Nedius\Controllers;
 
+use Nedius\Core\ResponseProvider;
+
 class HomeController {
 
-    public static function index() {
-        echo "Hello World! <br> <a href=\"https://nedius.com\\cat.jpg\">click me</a>";
+    public static function home() {
+        ResponseProvider::getPublicFile("home.html");
     }
 
-    public static function show() {
-        echo "Hello World! show";
-    }
-
-    public static function create() {
-        echo "Hello World! create";
-    }
-
-    public static function delete() {
-        echo "Hello World! delete";
+    public static function add() {
+        ResponseProvider::getPublicFile("add.html");
     }
 
 }

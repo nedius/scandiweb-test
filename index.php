@@ -4,10 +4,12 @@ require 'src/autoload.php';
 
 $router = new Nedius\Core\Router();
 
-$router->add('GET', '/', 'Nedius\Controllers\HomeController::index');
-$router->add('GET', '/products/show', 'Nedius\Controllers\HomeController::show');
-// $router->add('GET', '/products/add', 'Nedius\Controllers\HomeController::add');
-// $router->add('POST', '/products/add', 'Nedius\Controllers\HomeController::add');
-// $router->add('POST', '/products/delete', 'Nedius\Controllers\HomeController::delete');
+$router->add('GET', '/', 'Nedius\Controllers\HomeController::home');
+$router->add('GET', '/add-product', 'Nedius\Controllers\HomeController::add');
+$router->add('GET', '/products', 'Nedius\Controllers\ProductController::get');
+$router->add('POST', '/products/add', 'Nedius\Controllers\ProductController::add');
+$router->add('POST', '/products/delete', 'Nedius\Controllers\ProductController::delete');
 
 $router->go($_SERVER["REQUEST_METHOD"], $_SERVER["REQUEST_URI"]);
+
+// echo json_encode((new Nedius\core\Query("products"))->select("*")->where("sku", "=", "GGWP0007")->and("name", "=", "Chair")->get());
