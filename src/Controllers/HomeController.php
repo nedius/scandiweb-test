@@ -7,11 +7,11 @@ use Nedius\Core\ResponseProvider;
 class HomeController {
 
     public static function home() {
-        ResponseProvider::getPublicFile("home.html");
+        ResponseProvider::getView("productList");
     }
 
     public static function add() {
-        ResponseProvider::getPublicFile("add.html");
+        ResponseProvider::getView("addProduct");
     }
 
 }

@@ -11,5 +11,3 @@ $router->add('POST', '/products/add', 'Nedius\Controllers\ProductController::add
 $router->add('POST', '/products/delete', 'Nedius\Controllers\ProductController::delete');
 
 $router->go($_SERVER["REQUEST_METHOD"], $_SERVER["REQUEST_URI"]);
-
-// echo json_encode((new Nedius\core\Query("products"))->select("*")->where("sku", "=", "GGWP0007")->and("name", "=", "Chair")->get());

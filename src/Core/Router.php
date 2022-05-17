@@ -12,12 +12,20 @@ class Router {
 
     public function go($method, $path) {
         if (isset($this->paths[$method][$path])) {
-            return call_user_func($this->paths[$method][$path]);
+            if($method == "GET") {
+                return call_user_func($this->paths[$method][$path]);
+            } else {
+                if(empty($_POST)){
+                    return call_user_func($this->paths[$method][$path], json_decode(file_get_contents('php://input'), true));
+                } else {
+                    return call_user_func($this->paths[$method][$path], $_POST);
+                }
+            }
         } elseif($method == "GET") {
             ResponseProvider::getPublicFile($path);
             return;
         } else {
-            ResponseProvider::json(array("error" => array( "code" => 403, "message" => "Forbidden" )));
+            ResponseProvider::error(403);
         }
         return false;
     }
