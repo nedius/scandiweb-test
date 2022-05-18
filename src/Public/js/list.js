@@ -10,11 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (products.length > 0) {
-            // console.log(products);
-            // document.querySelectorAll('.delete-checkbox').forEach(checkbox => {
-            //     checkbox.checked = false;
-            // });
-
             fetch('/products/delete', {
                 method: 'POST',
                 headers: {

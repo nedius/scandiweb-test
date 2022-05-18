@@ -43,12 +43,12 @@ class Validate{
                 return is_numeric($value);
             case "float":
                 return is_float($value);
+            case "numericORfloat":
+                return is_numeric($value) || is_float($value);
             case "min":
                 return strlen($value) >= $rule;
             case "max":
                 return strlen($value) <= $rule;
-            case "regex":
-                return preg_match($rule, $value);
             default:
                 return false;
         }

@@ -13,17 +13,18 @@ class ProductController{
     }
 
     public static function add($data) {
-        $product = new Product($data);
-        if($product->save()){
+        $product = new Product;
+        if($product->validate($data) && $product->save()) {
             ResponseProvider::json(array('status' => 'success', 'message' => 'Product added'));
         }
     }
 
     public static function delete($data) {
+        $count = 0;
         foreach($data as $product) {
-            (new Product)->delete("sku", "=", $product);
+            $count += (new Product)->delete("sku", "=", $product)->affected_rows;
         }
-        ResponseProvider::json(array('status' => 'success', 'message' => count($data) . ' products deleted'));
+        ResponseProvider::json(array('status' => 'success', 'message' => $count . ' products deleted'));
     }
 
 }

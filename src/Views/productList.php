@@ -6,26 +6,26 @@
 
     $productTypes = array(
         "Book" => "Weight",
-        "Disc" => "Size",
+        "DVD" => "Size",
         "Furniture" => "Dimensions",
     );
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scandiweb-test</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="/js/list.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scandiweb-test</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <script src="/js/list.js"></script>
+    </head>
     <body>
         <header>
             <nav class="navbar bg-light">
                 <div class="container-fluid">
-                    <span class="navbar-brand mb-0 h1">Product list</span>
+                    <span class="navbar-brand mb-0 h1">Product List</span>
                     <form class="d-flex">
                         <button class="btn btn-sm btn-outline-success me-2" id="add-product-btn" type="button">ADD</button>
                         <button class="btn btn-sm btn-outline-danger" id="delete-product-btn" type="button">MASS DELETE</button>
@@ -41,7 +41,6 @@
                 <?php 
                     $products = (new Product)->all();
                     foreach ($products as $product) {
-
                         echo '<div class="col-md-3">
                                 <div class="card mb-4 box-shadow">
                                     <div class="card-body">

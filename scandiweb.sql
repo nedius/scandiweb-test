@@ -37,7 +37,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`sku`, `name`, `price`, `type`, `description`) VALUES
 ('GGWP0007', 'Wear and Peace', 20, 'Book', '2KG'),
-('JVC200123', 'Acme DISC', 1, 'Disc', '700 MB'),
+('JVC200123', 'Acme DISC', 1, 'DVD', '700 MB'),
 ('TR120555', 'Chair', 40, 'Furniture', '24x45x15');
 
 --
