@@ -53,7 +53,7 @@
                                         <div class="d-flex flex-column align-items-center">
                                             <p class="card-text mb-1">' . $product["sku"] . '</p>
                                             <p class="card-text mb-1">' . $product["name"] . '</p>
-                                            <p class="card-text mb-1">' . $product["price"] . '</p>
+                                            <p class="card-text mb-1">' . $product["price"] . ' $</p>
                                             <p class="card-text mb-1">' . $productTypes[$product["type"]] . ': ' . $product["description"] . '</p>
                                         </div>
                                     </div>

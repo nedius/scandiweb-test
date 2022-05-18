@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Setting text
         sku.innerText = product.sku;
         name.innerText = product.name;
-        price.innerText = product.price;
+        price.innerText = `${product.price} $`;
         type.innerText = getProductTypeDescription(product.type) + ': ' + product.description;
 
         // Appending elements
