@@ -46,8 +46,8 @@
                         <label class="col-sm-1 col-form-label"  for="type">Type</label>
                         <div class="col-sm-10">
                             <select class="form-control" id="productType" name="type" required>
-                                <option value="DVD">DVD</option>
                                 <option value="Book">Book</option>
+                                <option value="DVD">DVD</option>
                                 <option value="Furniture">Furniture</option>
                             </select>
                         </div>
@@ -95,6 +95,7 @@
                     </div>
 
                     <h5 id="formStatus" class="text-success mt-3"></h5>
+                    <ul id="formErrors"></ul>
 
                 </form>
             </div>

@@ -1,16 +1,3 @@
-<?php
-
-    use Nedius\Models\Product;
-
-    // $productTypes = Product::getTypes();
-
-    $productTypes = array(
-        "Book" => "Weight",
-        "DVD" => "Size",
-        "Furniture" => "Dimensions",
-    );
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -39,7 +26,13 @@
             
             <div id="product-list" class="row">
                 <?php 
-                    $products = (new Product)->all();
+                    $productTypes = array(
+                        "Book" => "Weight",
+                        "DVD" => "Size",
+                        "Furniture" => "Dimensions",
+                    );
+
+                    $products = (new Nedius\Models\Product)->all();
                     foreach ($products as $product) {
                         echo '<div class="col-md-3">
                                 <div class="card mb-4 box-shadow">
@@ -48,13 +41,13 @@
                                             <p class="card-text mb-1">checkbox</p>
                                         </div> -->
                                         <div class="form-check">
-                                            <input class="delete-checkbox form-check-input position-static" type="checkbox" value="' . $product["sku"] . '">
+                                            <input class="delete-checkbox form-check-input position-static" type="checkbox" value="' . $product->getSku() . '">
                                         </div>
                                         <div class="d-flex flex-column align-items-center">
-                                            <p class="card-text mb-1">' . $product["sku"] . '</p>
-                                            <p class="card-text mb-1">' . $product["name"] . '</p>
-                                            <p class="card-text mb-1">' . $product["price"] . ' $</p>
-                                            <p class="card-text mb-1">' . $productTypes[$product["type"]] . ': ' . $product["description"] . '</p>
+                                            <p class="card-text mb-1">' . $product->getSku() . '</p>
+                                            <p class="card-text mb-1">' . $product->getName() . '</p>
+                                            <p class="card-text mb-1">' . number_format($product->getPrice(), 2, '.', "") . ' $</p>
+                                            <p class="card-text mb-1">' . $productTypes[$product->getType()] . ': ' . $product->getDescription() . '</p>
                                         </div>
                                     </div>
                                 </div>

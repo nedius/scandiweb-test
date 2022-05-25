@@ -15,37 +15,37 @@ class Query extends Database {
         $this->tableName = $tableName;
     }
 
-    public function select(...$columns) {
+    protected function select(...$columns) {
         $this->sql = 'SELECT '.implode(',', $columns).' FROM '.$this->tableName;
         return $this;
     }
 
-    public function where($column, $operator, $value){
+    protected function where($column, $operator, $value){
         $this->data[] = $value;
         $this->sql .= ' WHERE '.$column.' '.$operator.' ?';
         return $this;
     }
 
-    public function and($column, $operator, $value) {
+    protected function and($column, $operator, $value) {
         $this->data[] = $value;
         $this->sql .= ' AND '.$column.' '.$operator.' ?';
         return $this;
     }
 
-    public function or($column, $operator, $value) {
+    protected function or($column, $operator, $value) {
         $this->data[] = $value;
         $this->sql .= ' OR '.$column.' '.$operator.' ?';
         return $this;
     }
 
-    public function delete($column, $operator, $value) {
+    protected function delete($column, $operator, $value) {
         $this->sql = 'DELETE FROM '.$this->tableName;
         $this->where($column, '=', $value);
 
         return $this->bind();
     }
 
-    public function insert(...$data){
+    protected function insert(...$data){
         $this->data = array_merge($this->data, $data);
         $this->sql = 'INSERT INTO '.$this->tableName.' VALUES ('.implode(',', array_fill(0, count($data), '?')).')';
 
@@ -75,7 +75,7 @@ class Query extends Database {
         return $this->stmt;
     }
 
-    public function get() {
+    protected function execute() {
         return mysqli_fetch_all($this->bind()->get_result(), MYSQLI_ASSOC);
     }
 

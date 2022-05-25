@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Setting text
         sku.innerText = product.sku;
         name.innerText = product.name;
-        price.innerText = `${product.price} $`;
+        price.innerText = `${product.price.toFixed(2)} $`;
         type.innerText = getProductTypeDescription(product.type) + ': ' + product.description;
 
         // Appending elements
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         switch (type) {
             case 'Book':
                 return 'Weight';
-            case 'Disc':
+            case 'DVD':
                 return 'Size';
             case 'Furniture':
                 return 'Dimensions';

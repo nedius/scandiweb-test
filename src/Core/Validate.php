@@ -7,13 +7,16 @@ class Validate{
     public static function validate($data, $rules) {
         $errors = [];
         foreach ($rules as $key => $value) {
-            if(!isset($data[$key])) {
-                $errors[$key] = "The $key field is required";
-            } else {
-                if(!empty($value)) {
-                    if(!self::validateRule($data[$key], $value)) {
-                        $errors[$key] = "The $key field is invalid";
+            if(!empty($value)) {
+                $result = self::validateRule($data[$key], $value);
+                if(is_string($result)) {
+                    $errors[$key] = "The $key $result";
+                } elseif(is_array($result) && !empty($result)) {
+                    $arr = array();
+                    foreach ($result as $value) {
+                        $arr[] = "The $key $value";
                     }
+                    $errors = $arr;
                 }
             }
         }
@@ -23,32 +26,45 @@ class Validate{
     private static function validateRule($value, $rule) {
         if(strpos($rule, "|") !== false) {
             $rules = explode("|", $rule);
+            $results = [];
             foreach ($rules as $rule) {
-                if(!self::validateRule($value, $rule)) {
-                    return false;
+                $result = self::validateRule($value, $rule);
+                if(is_string($result)) {
+                    $results[] = $result;
                 }
             }
-            return true;
+            return $results;
         }
         if(strpos($rule, ":") !== false) {
-            $rule = explode(":", $rule);
-            $rule = $rule[0];
+            $rules = explode(":", $rule);
+            $rule = $rules[0];
+            $subRule = $rules[1];
         }
         switch ($rule) {
             case "required":
-                return !empty($value);
+                return !empty($value) ?: "is required";
             case "string":
-                return is_string($value);
+                return is_string($value) ?: "must be a string";
             case "numeric":
-                return is_numeric($value);
+                return is_numeric($value) ?: "must be a number";
             case "float":
-                return is_float($value);
+                return is_float($value) ?: "must be a float";
             case "numericORfloat":
-                return is_numeric($value) || is_float($value);
+                return is_numeric($value) || is_float($value) ?: "must be a number or float";
             case "min":
-                return strlen($value) >= $rule;
+                if(is_string($value)) {
+                    return strlen($value) >= $subRule ?: "is too short";
+                } else {
+                    return $value >= $subRule ?: "is too small";
+                }
             case "max":
-                return strlen($value) <= $rule;
+                if(is_string($value)) {
+                    return strlen($value) <= $subRule ?: "is too long";
+                } else {
+                    return $value <= $subRule ?: "is too large";
+                }
+            case "not_null":
+                return $value !== null ?: "is required (null)";
             default:
                 return false;
         }

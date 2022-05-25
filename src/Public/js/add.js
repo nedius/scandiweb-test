@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).then(res => res.json())
         .then(data => {
             console.log(data);
-            setFormStatus(data.status, data.message);
+            setFormStatus(data.status, data.message, data.errors);
             if (data.status === 'success') {
                 window.location.href = '/';
             }
@@ -73,9 +73,29 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(`#${type}-div`).style.display = 'block';
     }
 
-    function setFormStatus(color, text){
+    function setFormStatus(color, text, errors){
         document.querySelector('#formStatus').classList = `text-${color} mt-3`;
         document.querySelector('#formStatus').innerText = text;
+
+        if(errors){
+            document.querySelector('#formErrors').innerHTML = '';
+            for(error in errors){
+                let li = document.createElement('li'),
+                    ul = document.createElement('ul');
+
+                li.innerText = error;
+                ul.id = `${error}-error`;
+
+                li.appendChild(ul);
+                document.querySelector(`#formErrors`).appendChild(li);
+
+                errors[error].forEach(err => {
+                    let li = document.createElement('li');
+                    li.innerText = err;
+                    document.querySelector(`#${error}-error`).appendChild(li);
+                });
+            }
+        }
     }
 
     changeType(document.querySelector('#productType').value);
