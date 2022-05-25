@@ -1,10 +1,8 @@
 <?php
 
-namespace Nedius\Models\Products;
+namespace Nedius\Models;
 
-use Nedius\Models\Product;
-
-class Book extends Product implements ProductInterface {
+class Book extends Products {
     public function validateType($description) {
         $bookRule = "/^(((\d+)|(\d+(\.|\,)\d+))\sKG)$/";
 

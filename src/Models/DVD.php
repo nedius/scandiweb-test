@@ -1,10 +1,8 @@
 <?php
 
-namespace Nedius\Models\Products;
+namespace Nedius\Models;
 
-use Nedius\Models\Product;
-
-class DVD extends Product implements ProductInterface {
+class DVD extends Products {
     public function validateType($description) {
         $bookRule = "/^(((\d+)|(\d+(\.|\,)\d+))\sMB)$/";
 

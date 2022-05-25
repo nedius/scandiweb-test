@@ -21,7 +21,7 @@ class ProductController{
 
     public static function add($data) {
         // no if-else or switch-case here, just autoload magic :sparkles:
-        $productType = 'Nedius\\Models\\Products\\' . $data['type'];
+        $productType = 'Nedius\\Models\\' . $data['type'];
 
         if(!class_exists($productType)) {
             ResponseProvider::json(array('status' => 'danger', 'message' => 'Invalid type'));
